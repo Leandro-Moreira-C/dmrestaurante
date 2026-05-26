@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ============================================================
+       SABOR DE LA VIDA — Restaurante Nicaragüense
+       Archivo: index.html
+       Metodología: BEM (Block__Element--Modifier)
+       Autor: Generado para proyecto universitario
+       Descripción: Página web completa del restaurante con
+                    navegación, hero, y secciones del menú
+  ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sabor De La Vida — Auténtica Cocina Nicaragüense</title>
+
+  <!-- Google Fonts: Playfair Display (display) + Barlow (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       BLOQUE: navbar
+       Descripción: Barra de navegación principal fija con logo
+                    y enlaces a las secciones del menú
+  ============================================================ -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+
+      <!-- navbar__brand: Logo del restaurante -->
+      <div class="navbar__brand">
+        <div class="navbar__logo-circle">
+          <span class="navbar__logo-text">SV</span>
+        </div>
+        <div class="navbar__brand-text">
+          <span class="navbar__brand-name">Sabor De La</span>
+          <span class="navbar__brand-accent">Vida</span>
+        </div>
+      </div>
+
+      <!-- navbar__menu: Links de navegación -->
+      <nav class="navbar__menu" id="navMenu" aria-label="Menú principal">
+        <a class="navbar__link" href="#platos-fuertes">Platos Fuertes</a>
+        <a class="navbar__link" href="#antojitos">Antojitos</a>
+        <a class="navbar__link" href="#ceviches">Ceviches</a>
+        <a class="navbar__link" href="#bebidas">Bebidas</a>
+        <a class="navbar__link" href="#extras">Extras</a>
+      </nav>
+
+      <!-- navbar__cta: Botón de pedido WhatsApp -->
+      <a class="navbar__cta" href="https://wa.me/50500000000" target="_blank" rel="noopener">
+        <span class="navbar__cta-icon">💬</span>
+        Pedir por WhatsApp
+      </a>
+
+      <!-- navbar__toggle: Botón hamburguesa para móvil -->
+      <button class="navbar__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       BLOQUE: hero
+       Descripción: Sección principal con imagen de fondo, eslogan
+                    y llamados a la acción
+  ============================================================ -->
+  <section class="hero" id="inicio">
+    <div class="hero__overlay"></div>
+
+    <div class="hero__content">
+      <!-- hero__badge: Etiqueta decorativa -->
+      <span class="hero__badge">Antojitos y Más</span>
+
+      <!-- hero__title: Título principal -->
+      <h1 class="hero__title">
+        Sabor De
+        <span class="hero__title--accent">La Vida</span>
+      </h1>
+
+      <!-- hero__description: Descripción del restaurante -->
+      <p class="hero__description">
+        Auténtica cocina nicaragüense con platos fuertes, antojitos,
+        mariscos frescos y una extensa carta de bebidas.
+        El sabor que te hace volver.
+      </p>
+
+      <!-- hero__actions: Botones de acción -->
+      <div class="hero__actions">
+        <a class="hero__btn hero__btn--primary" href="#platos-fuertes">
+          Ver Menú Completo
+        </a>
+        <a class="hero__btn hero__btn--secondary" href="https://wa.me/50500000000" target="_blank" rel="noopener">
+          Pedir por WhatsApp
+        </a>
+      </div>
+
+      <!-- hero__features: Atributos destacados -->
+      <div class="hero__features">
+        <span class="hero__feature">Recetas Caseras</span>
+        <span class="hero__feature-divider">·</span>
+        <span class="hero__feature">Hecho con Amor</span>
+        <span class="hero__feature-divider">·</span>
+        <span class="hero__feature">Servicio Rápido</span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: section-header (reutilizable)
+       BLOQUE: menu-section
+       Descripción: Sección de Platos Fuertes con cards de productos
+  ============================================================ -->
+  <section class="menu-section menu-section--dark" id="platos-fuertes">
+    <div class="menu-section__container">
+
+      <!-- menu-section__header: Encabezado de sección -->
+      <div class="menu-section__header">
+        <span class="menu-section__label">Especialidades</span>
+        <h2 class="menu-section__title">Platos Fuertes</h2>
+      </div>
+
+      <!-- menu-section__grid: Cuadrícula de platos -->
+      <div class="menu-section__grid menu-section__grid--three">
+
+        <!-- product-card: Cerdo -->
+        <article class="product-card" data-categoria="platos-fuertes" data-id="1">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="imgpg/Fondobienvenid.png"
+                 alt="Cerdo - Choleta Ahomada" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Cerdo</h3>
+            <p class="product-card__desc">Choleta Ahomada</p>
+            <span class="product-card__price">C$ 300</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(1,'Cerdo - Choleta Ahomada',300)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <!-- product-card: Res -->
+        <article class="product-card product-card--featured" data-categoria="platos-fuertes" data-id="2">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80"
+                 alt="Res - Chorrasco, Fajitas, Filete Jalapeño, Brochetas" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Res</h3>
+            <p class="product-card__desc">Chorrasco, Fajitas, Filete Jalapeño, Brochetas</p>
+            <span class="product-card__price">C$ 450</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(2,'Res - Chorrasco y más',450)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <!-- product-card: Pollo -->
+        <article class="product-card" data-categoria="platos-fuertes" data-id="3">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1587334274328-64186a80aeee?w=400&q=80"
+                 alt="Pollo - Alitas, Fajitas, Filete Jalapeño, Brochetas" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Pollo</h3>
+            <p class="product-card__desc">Alitas, Fajitas, Filete Jalapeño, Brochetas</p>
+            <span class="product-card__price">C$ 320</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(3,'Pollo - Alitas y más',320)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: menu-section (Antojitos)
+       Descripción: Sección de Antojitos con hero interno y cards
+  ============================================================ -->
+  <section class="menu-section menu-section--light" id="antojitos">
+    <div class="menu-section__container">
+
+      <div class="menu-section__header">
+        <span class="menu-section__label">Tradición Nicaragüense</span>
+        <h2 class="menu-section__title">Antojitos y <span class="menu-section__title--accent">Especiales</span></h2>
+      </div>
+
+      <!-- antojito-hero: Banner especial familia -->
+      <div class="antojito-hero">
+        <div class="antojito-hero__content">
+          <span class="antojito-hero__badge">4 Personas</span>
+          <h3 class="antojito-hero__title">Surtido Familiar<br/>Sabor de la Vida</h3>
+          <p class="antojito-hero__desc">
+            Pollo, res, cerdo, chorizos, queso, maduro, papas,
+            tajadas, gallopinto y encurtido.
+          </p>
+        </div>
+        <div class="antojito-hero__price-tag">C$ 1200</div>
+      </div>
+
+      <!-- menu-section__grid: Cards individuales -->
+      <div class="menu-section__grid menu-section__grid--three">
+
+        <article class="product-card" data-categoria="antojitos" data-id="4">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400&q=80"
+                 alt="Alitas con papas fritas" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Alitas</h3>
+            <p class="product-card__desc">Con papas fritas y aderezo</p>
+            <span class="product-card__price">C$ 350</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(4,'Alitas',350)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card" data-categoria="antojitos" data-id="5">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80"
+                 alt="Tajadas con carne" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Tajadas con Carne</h3>
+            <p class="product-card__desc">Tajadas verdes con carne molida</p>
+            <span class="product-card__price">C$ 220</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(5,'Tajadas con Carne',220)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card" data-categoria="antojitos" data-id="6">
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&q=80"
+                 alt="Nachos especiales" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Nachos</h3>
+            <p class="product-card__desc">Con jalapeños, guacamole y queso</p>
+            <span class="product-card__price">C$ 250</span>
+            <button class="product-card__btn" onclick="agregarAlCarrito(6,'Nachos',250)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: menu-section (Ceviches)
+       Descripción: Sección de Ceviches y Cócteles de mariscos
+  ============================================================ -->
+  <section class="menu-section menu-section--dark" id="ceviches">
+    <div class="menu-section__container">
+
+      <div class="menu-section__header">
+        <span class="menu-section__label">Del Mar a Tu Mesa</span>
+        <h2 class="menu-section__title">Ceviches &amp; <span class="menu-section__title--accent">Cócteles</span></h2>
+        <p class="menu-section__subtitle">
+          Acompañados con galletas o tajadas verdes. Frescos y preparados al momento.
+        </p>
+      </div>
+
+      <!-- menu-section__grid--six: Cuadrícula de 6 items (2 filas × 3 cols) -->
+      <div class="menu-section__grid menu-section__grid--three">
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="7">
+          <span class="product-card__price-badge">C$ 350</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1602273660127-a0000560a4f5?w=400&q=80"
+                 alt="Ceviche de camarón" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Ceviche de Camarón</h3>
+            <p class="product-card__desc">Camarón fresco con limón y chile</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(7,'Ceviche de Camarón',350)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="8">
+          <span class="product-card__price-badge">C$ 350</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80"
+                 alt="Cóctel de camarón" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Cóctel de Camarón</h3>
+            <p class="product-card__desc">Con salsa especial de la casa</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(8,'Cóctel de Camarón',350)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="9">
+          <span class="product-card__price-badge">C$ 400</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80"
+                 alt="Ceviche mixto" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Ceviche Mixto</h3>
+            <p class="product-card__desc">Camarón, pulpo y pescado</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(9,'Ceviche Mixto',400)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="10">
+          <span class="product-card__price-badge">C$ 300</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80"
+                 alt="Ceviche de pescado" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Ceviche de Pescado</h3>
+            <p class="product-card__desc">Ingredientes frescos del día</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(10,'Ceviche de Pescado',300)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="11">
+          <span class="product-card__price-badge">C$ 420</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=80"
+                 alt="Cóctel de pulpo" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Cóctel de Pulpo</h3>
+            <p class="product-card__desc">Con verduras y salsa de la casa</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(11,'Cóctel de Pulpo',420)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+        <article class="product-card product-card--seafood" data-categoria="ceviches" data-id="12">
+          <span class="product-card__price-badge">C$ 350</span>
+          <div class="product-card__image-wrap">
+            <img class="product-card__image"
+                 src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80"
+                 alt="Ceviche de langosta" loading="lazy" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Cóctel de Langosta</h3>
+            <p class="product-card__desc">Langosta fresca en salsa especial</p>
+            <button class="product-card__btn" onclick="agregarAlCarrito(12,'Cóctel de Langosta',350)">
+              Agregar al pedido
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="menu-section__note">★ Ingredientes frescos del día</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: menu-section (Bebidas)
+       Descripción: Bar & Coctelería con cervezas nacionales
+                    e internacionales, cubetazos, cócteles y licores
+  ============================================================ -->
+  <section class="menu-section menu-section--light" id="bebidas">
+    <div class="menu-section__container">
+
+      <div class="menu-section__header">
+        <span class="menu-section__label">Bebidas Alcohólicas</span>
+        <h2 class="menu-section__title">Bar &amp; <span class="menu-section__title--accent">Coctelería</span></h2>
+      </div>
+
+      <!-- bebidas__tabs: Filtros de categoría de bebida -->
+      <div class="bebidas__tabs" role="tablist" aria-label="Categorías de bebidas">
+        <button class="bebidas__tab bebidas__tab--active" role="tab" data-filter="todas" aria-selected="true">Todas</button>
+        <button class="bebidas__tab" role="tab" data-filter="cervezas" aria-selected="false">Cervezas</button>
+        <button class="bebidas__tab" role="tab" data-filter="cubetazos" aria-selected="false">Cubetazos</button>
+        <button class="bebidas__tab" role="tab" data-filter="cocteles" aria-selected="false">Cócteles</button>
+        <button class="bebidas__tab" role="tab" data-filter="licores" aria-selected="false">Licores</button>
+      </div>
+
+      <!-- menu-section__grid: Cards de bebidas -->
+      <div class="menu-section__grid menu-section__grid--four" id="bebidasGrid">
+
+        <!-- bebida-card: Toña (Nacional) -->
+        <article class="bebida-card" data-subcategoria="cervezas" data-id="13">
+          <div class="bebida-card__image-wrap">
+            <img class="bebida-card__image"
+                 src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=300&q=80"
+                 alt="Toña - Cerveza Nacional" loading="lazy" />
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--nacional">Nacional</span>
+            <h3 class="bebida-card__name">Toña</h3>
+            <p class="bebida-card__desc">Botella</p>
+            <span class="bebida-card__price">C$ 45</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(13,'Toña - Botella',45)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Heineken (Internacional) -->
+        <article class="bebida-card" data-subcategoria="cervezas" data-id="14">
+          <div class="bebida-card__image-wrap">
+            <img class="bebida-card__image"
+                 src="https://images.unsplash.com/photo-1566633806827-5c9b2c1cd9c4?w=300&q=80"
+                 alt="Heineken - Cerveza Internacional" loading="lazy" />
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--internacional">Internacional</span>
+            <h3 class="bebida-card__name">Heineken</h3>
+            <p class="bebida-card__desc">Botella</p>
+            <span class="bebida-card__price">C$ 82</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(14,'Heineken - Botella',82)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Sol (Internacional) -->
+        <article class="bebida-card" data-subcategoria="cervezas" data-id="15">
+          <div class="bebida-card__image-wrap">
+            <img class="bebida-card__image"
+                 src="https://images.unsplash.com/photo-1518791841217-8f162f1912da?w=300&q=80"
+                 alt="Sol - Cerveza Internacional" loading="lazy" />
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--internacional">Internacional</span>
+            <h3 class="bebida-card__name">Sol</h3>
+            <p class="bebida-card__desc">Botella</p>
+            <span class="bebida-card__price">C$ 75</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(15,'Sol - Botella',75)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Lite (Internacional) -->
+        <article class="bebida-card" data-subcategoria="cervezas" data-id="16">
+          <div class="bebida-card__image-wrap">
+            <img class="bebida-card__image"
+                 src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=300&q=80"
+                 alt="Lite - Cerveza Internacional" loading="lazy" />
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--internacional">Internacional</span>
+            <h3 class="bebida-card__name">Lite</h3>
+            <p class="bebida-card__desc">Botella</p>
+            <span class="bebida-card__price">C$ 60</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(16,'Lite - Botella',60)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Cubetazo Toña -->
+        <article class="bebida-card" data-subcategoria="cubetazos" data-id="17">
+          <div class="bebida-card__image-wrap bebida-card__image-wrap--bucket">
+            <span class="bebida-card__emoji">🍺</span>
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--nacional">Cubetazo</span>
+            <h3 class="bebida-card__name">Cubetazo Toña</h3>
+            <p class="bebida-card__desc">6 Toñas en cubeta de hielo</p>
+            <span class="bebida-card__price">C$ 240</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(17,'Cubetazo Toña',240)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Cóctel de la Casa -->
+        <article class="bebida-card" data-subcategoria="cocteles" data-id="18">
+          <div class="bebida-card__image-wrap bebida-card__image-wrap--bucket">
+            <span class="bebida-card__emoji">🍹</span>
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--coctel">Cóctel</span>
+            <h3 class="bebida-card__name">Cóctel de la Casa</h3>
+            <p class="bebida-card__desc">Preparación especial del bartender</p>
+            <span class="bebida-card__price">C$ 120</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(18,'Cóctel de la Casa',120)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Ron Flor de Caña -->
+        <article class="bebida-card" data-subcategoria="licores" data-id="19">
+          <div class="bebida-card__image-wrap bebida-card__image-wrap--bucket">
+            <span class="bebida-card__emoji">🥃</span>
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--licor">Licor</span>
+            <h3 class="bebida-card__name">Ron Flor de Caña</h3>
+            <p class="bebida-card__desc">Copa — 5 o 7 años</p>
+            <span class="bebida-card__price">C$ 90</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(19,'Ron Flor de Caña',90)">+</button>
+          </div>
+        </article>
+
+        <!-- bebida-card: Agua Mineral -->
+        <article class="bebida-card" data-subcategoria="cervezas" data-id="20">
+          <div class="bebida-card__image-wrap bebida-card__image-wrap--bucket">
+            <span class="bebida-card__emoji">💧</span>
+          </div>
+          <div class="bebida-card__body">
+            <span class="bebida-card__badge bebida-card__badge--nacional">Sin Alcohol</span>
+            <h3 class="bebida-card__name">Agua Mineral</h3>
+            <p class="bebida-card__desc">Botella 600ml</p>
+            <span class="bebida-card__price">C$ 25</span>
+            <button class="bebida-card__btn" onclick="agregarAlCarrito(20,'Agua Mineral',25)">+</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: menu-section (Extras)
+       Descripción: Extras y aderezos que complementan el pedido
+  ============================================================ -->
+  <section class="menu-section menu-section--dark" id="extras">
+    <div class="menu-section__container">
+
+      <div class="menu-section__header">
+        <span class="menu-section__label">Complementa tu Pedido</span>
+        <h2 class="menu-section__title">Extras &amp; <span class="menu-section__title--accent">Aderezos</span></h2>
+      </div>
+
+      <!-- extras__grid: Tabla de extras con precios -->
+      <div class="extras__grid">
+
+        <!-- Columna 1 -->
+        <div class="extras__column">
+          <div class="extra-item" data-id="21">
+            <span class="extra-item__name">Papas Western</span>
+            <span class="extra-item__price">C$ 70</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(21,'Papas Western',70)">+</button>
+          </div>
+          <div class="extra-item" data-id="22">
+            <span class="extra-item__name">Papas Francesas</span>
+            <span class="extra-item__price">C$ 50</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(22,'Papas Francesas',50)">+</button>
+          </div>
+          <div class="extra-item" data-id="23">
+            <span class="extra-item__name">Tostones \ Tajadas \ Queso</span>
+            <span class="extra-item__price">C$ 40</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(23,'Tostones/Tajadas/Queso',40)">+</button>
+          </div>
+          <div class="extra-item" data-id="24">
+            <span class="extra-item__name">Fuente de Hielo</span>
+            <span class="extra-item__price">C$ 40</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(24,'Fuente de Hielo',40)">+</button>
+          </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="extras__column">
+          <div class="extra-item" data-id="25">
+            <span class="extra-item__name">Ranch</span>
+            <span class="extra-item__price">C$ 30</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(25,'Ranch',30)">+</button>
+          </div>
+          <div class="extra-item" data-id="26">
+            <span class="extra-item__name">Búfalo</span>
+            <span class="extra-item__price">C$ 30</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(26,'Búfalo',30)">+</button>
+          </div>
+          <div class="extra-item" data-id="27">
+            <span class="extra-item__name">BBQ</span>
+            <span class="extra-item__price">C$ 35</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(27,'BBQ',35)">+</button>
+          </div>
+        </div>
+
+        <!-- Columna 3 -->
+        <div class="extras__column">
+          <div class="extra-item" data-id="28">
+            <span class="extra-item__name">Queso Cheddar</span>
+            <span class="extra-item__price">C$ 40</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(28,'Queso Cheddar',40)">+</button>
+          </div>
+          <div class="extra-item" data-id="29">
+            <span class="extra-item__name">Mostaza Miel</span>
+            <span class="extra-item__price">C$ 30</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(29,'Mostaza Miel',30)">+</button>
+          </div>
+          <div class="extra-item" data-id="30">
+            <span class="extra-item__name">Chile Criollo</span>
+            <span class="extra-item__price">C$ 35</span>
+            <button class="extra-item__btn" onclick="agregarAlCarrito(30,'Chile Criollo',35)">+</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- extras__cta: Banner de llamada a acción WhatsApp -->
+      <div class="extras__cta">
+        <div class="extras__cta-text">
+          <h3 class="extras__cta-title">¿Tienes Hambre?</h3>
+          <p class="extras__cta-desc">Escríbenos por WhatsApp y haz tu pedido de forma rápida y fácil.</p>
+        </div>
+        <a class="extras__cta-btn" href="https://wa.me/50500000000" target="_blank" rel="noopener">
+          💬 Pedir por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BLOQUE: footer
+       Descripción: Pie de página con info del restaurante
+  ============================================================ -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__brand">
+        <span class="footer__name">Sabor De La Vida</span>
+        <span class="footer__tagline">Auténtica Cocina Nicaragüense</span>
+      </div>
+      <p class="footer__copy">© 2025 Sabor De La Vida. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       BLOQUE: carrito (panel lateral flotante)
+       Descripción: Carrito de pedido deslizable desde la derecha.
+                    Se activa al agregar productos.
+  ============================================================ -->
+  <aside class="carrito" id="carrito" aria-label="Carrito de pedido" aria-hidden="true">
+    <div class="carrito__header">
+      <h2 class="carrito__title">Tu Pedido</h2>
+      <button class="carrito__close" id="carritoClose" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <!-- carrito__items: Lista dinámica generada por JS -->
+    <ul class="carrito__items" id="carritoItems"></ul>
+
+    <div class="carrito__footer">
+      <div class="carrito__total-row">
+        <span class="carrito__total-label">Total:</span>
+        <span class="carrito__total-amount" id="carritoTotal">C$ 0</span>
+      </div>
+      <button class="carrito__enviar-btn" id="carritoEnviar">
+        💬 Enviar pedido por WhatsApp
+      </button>
+      <button class="carrito__limpiar-btn" id="carritoLimpiar">
+        Limpiar carrito
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay oscuro del carrito -->
+  <div class="carrito__overlay" id="carritoOverlay" aria-hidden="true"></div>
+
+  <!-- Botón flotante del carrito -->
+  <button class="carrito__fab" id="carritoFab" aria-label="Ver carrito">
+    🛒 <span class="carrito__fab-count" id="carritoCount">0</span>
+  </button>
+
+
+  <!-- Script principal -->
+  <script src="app.js"></script>
+
+</body>
+</html>

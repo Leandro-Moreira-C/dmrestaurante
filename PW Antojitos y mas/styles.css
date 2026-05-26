@@ -1,0 +1,1417 @@
+/* ================================================================
+   SABOR DE LA VIDA — styles.css
+   Metodología: BEM (Block__Element--Modifier)
+   Descripción: Hoja de estilos principal. Cada bloque
+                está documentado con su función y sección.
+   ================================================================ */
+
+
+/* ----------------------------------------------------------------
+   CUSTOM PROPERTIES (Variables CSS Globales)
+   - Paleta de colores inspirada en el diseño original
+   - Tipografía, espaciados y transiciones
+   ---------------------------------------------------------------- */
+:root {
+  /* Colores primarios */
+  --color-bg-dark:      #1a1008;   /* Fondo oscuro principal (madera oscura) */
+  --color-bg-medium:    #231508;   /* Fondo oscuro secundario               */
+  --color-bg-light:     #f5f0e8;   /* Fondo claro (secciones alternas)      */
+  --color-bg-card:      #2a1a0a;   /* Fondo de tarjetas sobre dark          */
+
+  /* Colores de acento */
+  --color-orange:       #e55c14;   /* Naranja principal (logo, precios)     */
+  --color-orange-light: #f07030;   /* Naranja claro (hover)                 */
+  --color-gold:         #f0a020;   /* Dorado (labels de categoría)          */
+
+  /* Texto */
+  --color-text-white:   #ffffff;
+  --color-text-light:   #f0e8d8;   /* Texto sobre fondo oscuro              */
+  --color-text-muted:   #b8a080;   /* Texto secundario sobre dark           */
+  --color-text-dark:    #1a0f00;   /* Texto sobre fondo claro               */
+  --color-text-mid:     #4a3020;   /* Texto medio sobre fondo claro         */
+
+  /* Bordes */
+  --color-border-dark:  rgba(255,180,80,0.15);
+  --color-border-light: rgba(80,40,0,0.12);
+
+  /* Tipografía */
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-body:     'Barlow', sans-serif;
+  --font-cond:     'Barlow Condensed', sans-serif;
+
+  /* Espaciados */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2.5rem;
+  --space-xl:  4rem;
+  --space-xxl: 6rem;
+
+  /* Radios */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+
+  /* Sombras */
+  --shadow-card:   0 4px 24px rgba(0,0,0,0.45);
+  --shadow-btn:    0 2px 12px rgba(229,92,20,0.4);
+
+  /* Transiciones */
+  --transition-fast:   0.18s ease;
+  --transition-normal: 0.3s ease;
+}
+
+
+/* ----------------------------------------------------------------
+   RESET Y BASE
+   ---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+
+/* ================================================================
+   BLOQUE: navbar
+   Descripción: Barra de navegación fija. Se vuelve sólida al
+                hacer scroll gracias a la clase JS .navbar--scrolled
+   ================================================================ */
+
+/* navbar — bloque contenedor */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: background var(--transition-normal), padding var(--transition-normal);
+}
+
+/* navbar--scrolled — modificador: fondo sólido al hacer scroll */
+.navbar--scrolled {
+  background: rgba(20, 10, 3, 0.97);
+  backdrop-filter: blur(10px);
+  padding: 0.6rem 0;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.6);
+}
+
+/* navbar__container — elemento: wrapper interno */
+.navbar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* navbar__brand — elemento: logo + nombre */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* navbar__logo-circle — elemento: círculo del logo */
+.navbar__logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-gold);
+}
+
+.navbar__logo-text {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+/* navbar__brand-text — elemento: textos del brand */
+.navbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.navbar__brand-name {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navbar__brand-accent {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-orange);
+}
+
+/* navbar__menu — elemento: links de navegación */
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  justify-content: center;
+}
+
+/* navbar__link — elemento: enlace individual */
+.navbar__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  position: relative;
+  padding-bottom: 3px;
+  transition: color var(--transition-fast);
+}
+
+/* navbar__link — pseudo-elemento subrayado animado */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-orange);
+  transition: width var(--transition-normal);
+}
+
+.navbar__link:hover {
+  color: var(--color-orange);
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+}
+
+/* navbar__cta — elemento: botón WhatsApp */
+.navbar__cta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--color-orange);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.navbar__cta:hover {
+  background: var(--color-orange-light);
+  transform: translateY(-1px);
+}
+
+/* navbar__toggle — elemento: hamburguesa (solo móvil) */
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  margin-left: auto;
+}
+
+.navbar__toggle-bar {
+  width: 24px;
+  height: 2px;
+  background: var(--color-text-light);
+  border-radius: 2px;
+  transition: transform var(--transition-normal), opacity var(--transition-fast);
+}
+
+
+/* ================================================================
+   BLOQUE: hero
+   Descripción: Sección de presentación principal con imagen de
+                fondo, overlay y contenido centrado
+   ================================================================ */
+
+/* hero — bloque contenedor */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-image: url('imgpg/Fondobienvenid.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 80px;
+}
+
+/* hero__overlay — elemento: gradiente oscuro sobre la imagen */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15,6,0,0.88) 0%,
+    rgba(30,12,0,0.70) 50%,
+    rgba(10,4,0,0.80) 100%
+  );
+}
+
+/* hero__content — elemento: contenido principal (z-index sobre overlay) */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: var(--space-xl) var(--space-sm);
+  margin-left: 8vw;
+  animation: heroFadeIn 1s ease both;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* hero__badge — elemento: etiqueta decorativa naranja */
+.hero__badge {
+  display: inline-block;
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-sm);
+}
+
+/* hero__title — elemento: título principal */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--color-text-white);
+  margin-bottom: 0.3rem;
+}
+
+/* hero__title--accent — modificador: línea naranja del título */
+.hero__title--accent {
+  display: block;
+  color: var(--color-orange);
+}
+
+/* hero__description — elemento: párrafo descriptivo */
+.hero__description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+/* hero__actions — elemento: grupo de botones */
+.hero__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
+}
+
+/* hero__btn — elemento: botón base */
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.hero__btn:hover {
+  transform: translateY(-2px);
+}
+
+/* hero__btn--primary — modificador: botón naranja */
+.hero__btn--primary {
+  background: var(--color-orange);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+
+.hero__btn--primary:hover {
+  background: var(--color-orange-light);
+}
+
+/* hero__btn--secondary — modificador: botón contorno */
+.hero__btn--secondary {
+  background: transparent;
+  color: var(--color-text-white);
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+.hero__btn--secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.7);
+}
+
+/* hero__features — elemento: atributos en fila */
+.hero__features {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.hero__feature {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.hero__feature-divider {
+  color: var(--color-orange);
+  font-size: 1.2rem;
+}
+
+
+/* ================================================================
+   BLOQUE: menu-section
+   Descripción: Sección genérica del menú. Se usa como contenedor
+                para cada categoría de platos/bebidas.
+   ================================================================ */
+
+/* menu-section — bloque base */
+.menu-section {
+  padding: var(--space-xxl) 0;
+}
+
+/* menu-section--dark — modificador: fondo oscuro */
+.menu-section--dark {
+  background-color: var(--color-bg-dark);
+}
+
+/* menu-section--light — modificador: fondo claro alterno */
+.menu-section--light {
+  background-color: #f7f0e3;
+  color: var(--color-text-dark);
+}
+
+/* menu-section__container — elemento: wrapper con ancho máximo */
+.menu-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+/* menu-section__header — elemento: encabezado de sección */
+.menu-section__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* menu-section__label — elemento: etiqueta pequeña dorada */
+.menu-section__label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-gold);
+  margin-bottom: 0.4rem;
+}
+
+/* Override para sección clara */
+.menu-section--light .menu-section__label {
+  color: var(--color-orange);
+}
+
+/* menu-section__title — elemento: título H2 de sección */
+.menu-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* menu-section__title--accent — modificador: palabra en naranja */
+.menu-section__title--accent {
+  color: var(--color-orange);
+}
+
+/* Override para sección clara */
+.menu-section--light .menu-section__title {
+  color: var(--color-text-dark);
+}
+
+/* menu-section__subtitle — elemento: párrafo bajo el título */
+.menu-section__subtitle {
+  margin-top: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+/* menu-section__note — elemento: nota de pie de sección */
+.menu-section__note {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-top: var(--space-md);
+}
+
+/* menu-section__grid — elemento: cuadrícula de tarjetas */
+.menu-section__grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* menu-section__grid--three — modificador: 3 columnas */
+.menu-section__grid--three {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* menu-section__grid--four — modificador: 4 columnas */
+.menu-section__grid--four {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+
+/* ================================================================
+   BLOQUE: product-card
+   Descripción: Tarjeta de producto del menú (platos, antojitos,
+                ceviches). Muestra imagen, nombre, descripción y precio.
+   ================================================================ */
+
+/* product-card — bloque */
+.product-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border-dark);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* product-card--featured — modificador: tarjeta destacada con borde naranja */
+.product-card--featured {
+  border-color: var(--color-orange);
+  box-shadow: 0 4px 30px rgba(229,92,20,0.25);
+}
+
+/* product-card--seafood — modificador: ceviches (precio en badge absoluto) */
+.product-card--seafood {
+  position: relative;
+}
+
+/* Sección clara: ajuste de colores en product-card */
+.menu-section--light .product-card {
+  background: #fff;
+  border-color: var(--color-border-light);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* product-card__price-badge — elemento: precio flotante en esquina */
+.product-card__price-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-cond);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xl);
+}
+
+/* product-card__image-wrap — elemento: contenedor de imagen */
+.product-card__image-wrap {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+
+/* product-card__image — elemento: imagen con zoom en hover */
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.07);
+}
+
+/* product-card__body — elemento: contenido textual */
+.product-card__body {
+  padding: var(--space-sm);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* product-card__name — elemento: nombre del plato */
+.product-card__name {
+  font-family: var(--font-cond);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-text-white);
+  line-height: 1.1;
+}
+
+.menu-section--light .product-card__name {
+  color: var(--color-text-dark);
+}
+
+/* product-card__desc — elemento: descripción breve */
+.product-card__desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.menu-section--light .product-card__desc {
+  color: var(--color-text-mid);
+}
+
+/* product-card__price — elemento: precio en naranja */
+.product-card__price {
+  font-family: var(--font-cond);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-orange);
+}
+
+/* product-card__btn — elemento: botón agregar al pedido */
+.product-card__btn {
+  margin-top: auto;
+  background: var(--color-orange);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: 0.5px;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.product-card__btn:hover {
+  background: var(--color-orange-light);
+  transform: translateY(-1px);
+}
+
+
+/* ================================================================
+   BLOQUE: antojito-hero
+   Descripción: Banner especial para el paquete familiar "Surtido".
+                Muestra info y precio grande destacado.
+   ================================================================ */
+
+.antojito-hero {
+  background: linear-gradient(135deg, #2a1500 0%, #3d1f00 100%);
+  border: 1px solid rgba(229,92,20,0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-card);
+}
+
+.menu-section--light .antojito-hero {
+  background: linear-gradient(135deg, #fff5e8 0%, #ffe8cc 100%);
+  border-color: rgba(229,92,20,0.2);
+}
+
+.antojito-hero__content {
+  flex: 1;
+  min-width: 240px;
+}
+
+/* antojito-hero__badge — elemento: etiqueta verde "4 Personas" */
+.antojito-hero__badge {
+  display: inline-block;
+  background: #2d7a22;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-xl);
+  margin-bottom: 0.5rem;
+}
+
+/* antojito-hero__title — elemento: título del paquete */
+.antojito-hero__title {
+  font-family: var(--font-cond);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-text-white);
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+.menu-section--light .antojito-hero__title {
+  color: var(--color-text-dark);
+}
+
+/* antojito-hero__desc — elemento: ingredientes listados */
+.antojito-hero__desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.menu-section--light .antojito-hero__desc {
+  color: var(--color-text-mid);
+}
+
+/* antojito-hero__price-tag — elemento: precio grande */
+.antojito-hero__price-tag {
+  font-family: var(--font-cond);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-orange);
+  white-space: nowrap;
+  background: rgba(229,92,20,0.12);
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(229,92,20,0.25);
+}
+
+
+/* ================================================================
+   BLOQUE: bebida-card
+   Descripción: Tarjeta compacta para bebidas. Muestra imagen/emoji,
+                badge de origen y precio con botón rápido +
+   ================================================================ */
+
+/* bebida-card — bloque */
+.bebida-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border-dark);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-section--light .bebida-card {
+  background: #fff;
+  border-color: var(--color-border-light);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.bebida-card:hover {
+  transform: translateY(-4px);
+}
+
+/* bebida-card__image-wrap — elemento: contenedor de imagen */
+.bebida-card__image-wrap {
+  height: 160px;
+  overflow: hidden;
+  background: #1a0f00;
+}
+
+/* bebida-card__image-wrap--bucket — modificador: sin imagen, solo emoji */
+.bebida-card__image-wrap--bucket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #231508;
+}
+
+.bebida-card__emoji {
+  font-size: 3rem;
+}
+
+/* bebida-card__image — elemento: imagen de bebida */
+.bebida-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.bebida-card:hover .bebida-card__image {
+  transform: scale(1.05);
+}
+
+/* bebida-card__body — elemento: contenido textual */
+.bebida-card__body {
+  padding: 0.75rem var(--space-sm);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+}
+
+/* bebida-card__badge — elemento: etiqueta de origen */
+.bebida-card__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xl);
+}
+
+/* Modificadores de color para bebida-card__badge */
+.bebida-card__badge--nacional {
+  background: rgba(229,92,20,0.2);
+  color: var(--color-orange);
+}
+
+.bebida-card__badge--internacional {
+  background: rgba(30,80,160,0.2);
+  color: #6aa3f0;
+}
+
+.bebida-card__badge--coctel {
+  background: rgba(120,40,150,0.2);
+  color: #c080f0;
+}
+
+.bebida-card__badge--licor {
+  background: rgba(180,120,20,0.2);
+  color: var(--color-gold);
+}
+
+/* bebida-card__name — elemento: nombre del producto */
+.bebida-card__name {
+  font-family: var(--font-cond);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-white);
+}
+
+.menu-section--light .bebida-card__name {
+  color: var(--color-text-dark);
+}
+
+/* bebida-card__desc — elemento: tipo/presentación */
+.bebida-card__desc {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+/* bebida-card__price — elemento: precio */
+.bebida-card__price {
+  font-family: var(--font-cond);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-orange);
+}
+
+/* bebida-card__btn — elemento: botón "+" agregar rápido */
+.bebida-card__btn {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.bebida-card__btn:hover {
+  background: var(--color-orange-light);
+  transform: scale(1.15);
+}
+
+
+/* ================================================================
+   BLOQUE: bebidas__tabs
+   Descripción: Filtros de categoría de bebidas (botones tab)
+   ================================================================ */
+
+.bebidas__tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* bebidas__tab — elemento: botón de filtro */
+.bebidas__tab {
+  background: transparent;
+  border: 2px solid var(--color-orange);
+  color: var(--color-orange);
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+/* bebidas__tab--active — modificador: tab seleccionado */
+.bebidas__tab--active,
+.bebidas__tab:hover {
+  background: var(--color-orange);
+  color: #fff;
+}
+
+.menu-section--light .bebidas__tab {
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+
+/* ================================================================
+   BLOQUE: extras__grid / extra-item
+   Descripción: Cuadrícula de 3 columnas para extras y aderezos.
+                Cada fila es un extra-item con nombre, precio y botón.
+   ================================================================ */
+
+/* extras__grid — bloque: cuadrícula de tres columnas */
+.extras__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+/* extras__column — elemento: columna individual */
+.extras__column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* extra-item — bloque: fila de extra individual */
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  transition: background var(--transition-fast);
+}
+
+.extra-item:hover {
+  background: rgba(229,92,20,0.08);
+}
+
+/* extra-item__name — elemento: nombre del extra */
+.extra-item__name {
+  flex: 1;
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+}
+
+/* extra-item__price — elemento: precio del extra */
+.extra-item__price {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-orange);
+  white-space: nowrap;
+}
+
+/* extra-item__btn — elemento: botón + agregar */
+.extra-item__btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.extra-item__btn:hover {
+  background: var(--color-orange-light);
+  transform: scale(1.12);
+}
+
+/* extras__cta — bloque: banner CTA WhatsApp */
+.extras__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  background: var(--color-orange);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.extras__cta-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+
+.extras__cta-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* extras__cta-btn — elemento: botón WhatsApp del CTA */
+.extras__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #1a1008;
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background var(--transition-fast);
+}
+
+.extras__cta-btn:hover {
+  background: #2a2010;
+}
+
+
+/* ================================================================
+   BLOQUE: footer
+   ================================================================ */
+
+.footer {
+  background: #0d0600;
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-border-dark);
+}
+
+.footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-orange);
+}
+
+.footer__tagline {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.footer__copy {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+
+/* ================================================================
+   BLOQUE: carrito
+   Descripción: Panel lateral deslizable de pedido. Se muestra
+                cuando el usuario agrega items con el botón.
+   ================================================================ */
+
+/* carrito — bloque: panel deslizable */
+.carrito {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 380px;
+  max-width: 100vw;
+  height: 100vh;
+  background: #1c1005;
+  border-left: 1px solid var(--color-border-dark);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right var(--transition-normal);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.6);
+}
+
+/* carrito--open — modificador: panel visible */
+.carrito--open {
+  right: 0;
+}
+
+/* carrito__header — elemento: cabecera del panel */
+.carrito__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.carrito__title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-text-white);
+}
+
+/* carrito__close — elemento: botón cerrar */
+.carrito__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.carrito__close:hover {
+  background: rgba(229,92,20,0.25);
+}
+
+/* carrito__items — elemento: lista de items */
+.carrito__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* carrito-item (generado por JS) */
+.carrito-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border-dark);
+}
+
+.carrito-item__name {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.carrito-item__qty {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.carrito-item__qty-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-orange);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.carrito-item__qty-btn:hover {
+  background: var(--color-orange-light);
+}
+
+.carrito-item__count {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-white);
+  min-width: 18px;
+  text-align: center;
+}
+
+.carrito-item__price {
+  font-family: var(--font-cond);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-orange);
+}
+
+/* carrito__footer — elemento: total y botones */
+.carrito__footer {
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid var(--color-border-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.carrito__total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carrito__total-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.carrito__total-amount {
+  font-family: var(--font-cond);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-orange);
+}
+
+/* carrito__enviar-btn — elemento: botón enviar por WhatsApp */
+.carrito__enviar-btn {
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  transition: background var(--transition-fast);
+}
+
+.carrito__enviar-btn:hover {
+  background: #20b557;
+}
+
+/* carrito__limpiar-btn — elemento: botón limpiar carrito */
+.carrito__limpiar-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.carrito__limpiar-btn:hover {
+  border-color: rgba(229,92,20,0.4);
+  color: var(--color-orange);
+}
+
+/* carrito__overlay — elemento: fondo oscuro cuando el carrito está abierto */
+.carrito__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.carrito__overlay--visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* carrito__fab — botón flotante de carrito */
+.carrito__fab {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  z-index: 999;
+  background: var(--color-orange);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  box-shadow: var(--shadow-btn);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.carrito__fab:hover {
+  background: var(--color-orange-light);
+  transform: translateY(-2px);
+}
+
+/* carrito__fab-count — elemento: contador de items */
+.carrito__fab-count {
+  background: #fff;
+  color: var(--color-orange);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ================================================================
+   RESPONSIVE — Puntos de quiebre para móvil
+   ================================================================ */
+@media (max-width: 768px) {
+
+  /* Navbar: ocultar links, mostrar hamburguesa */
+  .navbar__menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15,7,0,0.98);
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-lg);
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+    z-index: 900;
+  }
+
+  .navbar__menu--open {
+    transform: translateX(0);
+  }
+
+  .navbar__link {
+    font-size: 1.4rem;
+  }
+
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__toggle {
+    display: flex;
+    z-index: 1001;
+  }
+
+  /* Hero: contenido centrado en móvil */
+  .hero__content {
+    margin-left: 0;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__features {
+    justify-content: center;
+  }
+
+  /* Extras: CTA vertical */
+  .extras__cta {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Footer: vertical */
+  .footer__container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
